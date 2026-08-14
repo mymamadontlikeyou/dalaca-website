@@ -138,6 +138,7 @@
     align-items:center;
     gap:40px;
   }
+  .hero-bg{display:none;}
   @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
   }
@@ -244,6 +245,42 @@
     border-radius:2px;
     border:1px solid rgba(11,37,69,0.1);
   }
+
+  /* ---------- HERO: DESKTOP BACKGROUND-PHOTO MODE ---------- */
+  @media(min-width:901px){
+    .hero{
+      background:none;
+      color:var(--white);
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+    .hero-bg img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .hero-bg::after{
+      content:'';
+      position:absolute;inset:0;
+      background:linear-gradient(100deg, rgba(7,26,51,0.88) 0%, rgba(7,26,51,0.72) 38%, rgba(7,26,51,0.32) 68%, rgba(7,26,51,0.15) 100%);
+    }
+    .hero-grid{grid-template-columns:1fr;}
+    .eyebrow{color:var(--gold-300);}
+    .hero h1{color:var(--white);}
+    .hero h1 span{color:var(--blue-400);}
+    .hero p.lead{color:rgba(255,255,255,0.78);}
+    .hero-stats{border-top-color:rgba(255,255,255,0.2);}
+    .hero-stats div b{color:var(--white);}
+    .hero-stats div span{color:rgba(255,255,255,0.65);}
+    .btn-ghost{border-color:rgba(255,255,255,0.4);color:var(--white);}
+    .btn-ghost:hover{border-color:var(--white);}
+    .hero-art{display:none;}
+    .route-label{background:rgba(7,26,51,0.55);color:var(--white);border-color:rgba(255,255,255,0.2);}
+  }
+
 
   /* wave divider */
   .wave-divider{
@@ -544,6 +581,9 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero">
+  <div class="hero-bg">
+    <img src="assets/ship-hero.jpg" alt="Kapal kontainer PT Daviz Laju Cakrawala berlabuh saat senja">
+  </div>
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Trusted Partner In Every Voyage</span>
