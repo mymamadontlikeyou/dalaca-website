@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daviz Laju Cakrawala | Agent Shipping Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#071A33;
+    --navy-900:#0B2545;
+    --navy-800:#123564;
+    --blue-600:#1C6DD0;
+    --blue-400:#4C9FE8;
+    --gold-500:#F5A623;
+    --gold-300:#FBCB6E;
+    --cream-50:#F7F9FC;
+    --slate-600:#52627A;
+    --slate-400:#8494AC;
+    --white:#FFFFFF;
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--navy-900);
+    background:var(--cream-50);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.08em;
+  }
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  @media(max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(247,249,252,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(11,37,69,0.08);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:var(--navy-900);
+  }
+  .brand .sun{
+    width:26px;height:26px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-300), var(--gold-500) 60%, #E08A00 100%);
+    flex-shrink:0;
+  }
+  .brand small{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:400;
+    font-size:0.6rem;
+    letter-spacing:0.12em;
+    color:var(--slate-600);
+    text-transform:uppercase;
+    margin-top:2px;
+  }
+  nav ul{
+    display:flex;
+    gap:36px;
+    list-style:none;
+  }
+  nav a{
+    font-size:0.88rem;
+    font-weight:500;
+    color:var(--navy-800);
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a::after{
+    content:'';
+    position:absolute;left:0;bottom:0;
+    width:0;height:1.5px;
+    background:var(--gold-500);
+    transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--navy-900);
+    color:var(--white)!important;
+    padding:10px 20px;
+    font-size:0.82rem;
+    font-weight:600;
+    border-radius:var(--radius);
+  }
+  .nav-toggle{display:none;}
+  @media(max-width:860px){
+    nav ul{display:none;}
+    .nav-toggle{display:block;background:none;border:none;font-size:1.4rem;color:var(--navy-900);cursor:pointer;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:76px;
+    background:linear-gradient(180deg, #DCEBFB 0%, #F1F6FC 55%, var(--cream-50) 100%);
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:relative;
+    z-index:3;
+    width:100%;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    align-items:center;
+    gap:40px;
+  }
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:26px;height:1px;
+    background:var(--gold-500);
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.6rem);
+    line-height:1.08;
+    font-weight:700;
+    color:var(--navy-950);
+    margin-bottom:22px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 span{color:var(--blue-600);}
+  .hero p.lead{
+    font-size:1.05rem;
+    color:var(--slate-600);
+    max-width:460px;
+    margin-bottom:34px;
+    line-height:1.65;
+  }
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px;}
+  .btn-primary{
+    background:var(--navy-900);
+    color:var(--white);
+    padding:15px 28px;
+    font-weight:600;
+    font-size:0.92rem;
+    border-radius:var(--radius);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn-primary:hover{background:var(--blue-600);transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid rgba(11,37,69,0.25);
+    padding:15px 28px;
+    font-weight:600;
+    font-size:0.92rem;
+    border-radius:var(--radius);
+    color:var(--navy-900);
+    transition:border-color .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--navy-900);}
+  .hero-stats{
+    display:flex;
+    gap:36px;
+    padding-top:28px;
+    border-top:1px solid rgba(11,37,69,0.12);
+  }
+  .hero-stats div b{
+    display:block;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.5rem;
+    color:var(--navy-950);
+  }
+  .hero-stats div span{
+    font-size:0.76rem;
+    color:var(--slate-600);
+  }
+
+  /* Hero illustration - horizon signature element */
+  .hero-art{
+    position:relative;
+    height:480px;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 24px 60px -20px rgba(11,37,69,0.35);
+  }
+  .hero-art svg{width:100%;height:100%;}
+  .hero-art img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .hero-art::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(7,26,51,0) 55%, rgba(7,26,51,0.55) 100%);
+    pointer-events:none;
+  }
+  .route-label{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.66rem;
+    color:var(--navy-800);
+    background:rgba(255,255,255,0.85);
+    padding:4px 8px;
+    border-radius:2px;
+    border:1px solid rgba(11,37,69,0.1);
+  }
+
+  /* wave divider */
+  .wave-divider{
+    display:block;
+    width:100%;
+    line-height:0;
+    position:relative;
+    z-index:2;
+    margin-top:-2px;
+  }
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:110px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:60px;
+  }
+  .section-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    margin-bottom:14px;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3.4vw,2.5rem);
+    font-weight:700;
+    color:var(--navy-950);
+    line-height:1.15;
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--slate-600);
+    font-size:1rem;
+    line-height:1.7;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--white);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:start;
+  }
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+  .about-copy p{
+    color:var(--slate-600);
+    line-height:1.75;
+    margin-bottom:18px;
+    font-size:1rem;
+  }
+  .commit-box{
+    background:var(--navy-950);
+    color:var(--white);
+    padding:28px 30px;
+    border-radius:var(--radius);
+    border-left:3px solid var(--gold-500);
+    margin-top:8px;
+  }
+  .commit-box .section-tag{color:var(--gold-300);}
+  .commit-box p{color:rgba(255,255,255,0.78);font-size:0.95rem;line-height:1.7;}
+
+  .value-list{display:flex;flex-direction:column;gap:0;}
+  .value-item{
+    display:flex;
+    gap:20px;
+    padding:22px 0;
+    border-top:1px solid rgba(11,37,69,0.1);
+  }
+  .value-item:last-child{border-bottom:1px solid rgba(11,37,69,0.1);}
+  .value-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    color:var(--gold-500);
+    padding-top:3px;
+    flex-shrink:0;
+    width:26px;
+  }
+  .value-item h4{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.02rem;
+    margin-bottom:6px;
+    color:var(--navy-950);
+  }
+  .value-item p{font-size:0.9rem;color:var(--slate-600);line-height:1.6;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--cream-50);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(11,37,69,0.1);
+    border:1px solid rgba(11,37,69,0.1);
+  }
+  @media(max-width:860px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--white);
+    padding:44px 36px;
+    position:relative;
+    transition:background .25s ease;
+  }
+  .service-card:hover{background:#FCFBF7;}
+  .service-card .icon{
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--navy-950);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:26px;
+  }
+  .service-card .icon svg{width:24px;height:24px;stroke:var(--gold-300);}
+  .service-card .code{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    color:var(--slate-400);
+    display:block;
+    margin-bottom:10px;
+  }
+  .service-card h3{
+    font-size:1.2rem;
+    color:var(--navy-950);
+    margin-bottom:12px;
+  }
+  .service-card p{
+    font-size:0.92rem;
+    color:var(--slate-600);
+    line-height:1.65;
+  }
+
+  /* ---------- GLOBAL REACH ---------- */
+  .reach{
+    background:var(--navy-950);
+    color:var(--white);
+    position:relative;
+    overflow:hidden;
+  }
+  .reach .section-tag{color:var(--gold-300);}
+  .reach .section-head h2{color:var(--white);}
+  .reach .section-head p{color:rgba(255,255,255,0.65);}
+  .reach-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:32px;
+    align-items:center;
+  }
+  .route-svg{width:100%;height:auto;}
+  .reach-photo{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.5);
+  }
+  .reach-photo img{width:100%;height:220px;object-fit:cover;display:block;}
+  .reach-photo::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(7,26,51,0.55) 0%, rgba(7,26,51,0) 45%);
+  }
+  .reach-photo .route-label{position:absolute;bottom:14px;left:14px;}
+  .reach-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .reach-stat{
+    background:var(--navy-950);
+    padding:26px 24px;
+  }
+  .reach-stat b{
+    display:block;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.4rem;
+    color:var(--gold-300);
+    margin-bottom:4px;
+  }
+  .reach-stat span{font-size:0.8rem;color:rgba(255,255,255,0.6);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{background:var(--white);}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info dl{display:flex;flex-direction:column;gap:26px;}
+  .contact-info dt{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    margin-bottom:6px;
+  }
+  .contact-info dd{
+    font-size:1.02rem;
+    color:var(--navy-950);
+    line-height:1.6;
+  }
+  .contact-form{
+    background:var(--cream-50);
+    padding:36px;
+    border:1px solid rgba(11,37,69,0.1);
+  }
+  .contact-form label{
+    display:block;
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--navy-800);
+    margin-bottom:8px;
+  }
+  .contact-form input,.contact-form textarea{
+    width:100%;
+    border:1px solid rgba(11,37,69,0.18);
+    background:var(--white);
+    padding:12px 14px;
+    font-family:'Inter',sans-serif;
+    font-size:0.92rem;
+    border-radius:var(--radius);
+    margin-bottom:20px;
+    color:var(--navy-900);
+  }
+  .contact-form input:focus,.contact-form textarea:focus{
+    outline:2px solid var(--blue-400);
+    outline-offset:1px;
+  }
+  .contact-form button{
+    width:100%;
+    background:var(--navy-950);
+    color:var(--white);
+    border:none;
+    padding:15px;
+    font-weight:600;
+    font-size:0.92rem;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .contact-form button:hover{background:var(--blue-600);}
+
+  footer{
+    background:var(--navy-950);
+    color:rgba(255,255,255,0.55);
+    padding:28px 0;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.82rem;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-inner .mono{color:rgba(255,255,255,0.4);}
+
+  /* reveal animation */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{outline:2px solid var(--blue-600);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <span class="sun"></span>
+      <span>Daviz Laju Cakrawala
+        <small>Agent Shipping Company</small>
+      </span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#jangkauan">Jangkauan</a></li>
+        <li><a href="#kontak" class="nav-cta">Hubungi Kami</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Trusted Partner In Every Voyage</span>
+      <h1>Layanan agensi <span>pelayaran</span> yang tepercaya, di setiap pelabuhan.</h1>
+      <p class="lead">Daviz Laju Cakrawala mendampingi kapal &amp; principal dengan layanan agensi yang penuh integritas, andal, dan efisien — menghubungkan setiap perjalanan di lautan.</p>
+      <div class="btn-row">
+        <a href="#kontak" class="btn-primary">Hubungi Kami →</a>
+        <a href="#layanan" class="btn-ghost">Lihat Layanan</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>03</b><span>Lini Layanan Utama</span></div>
+        <div><b>Cilegon</b><span>Pusat Operasional</span></div>
+        <div><b>24/7</b><span>Dukungan Operasional</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <img src="assets/ship-hero.jpg" alt="Kapal kontainer PT Daviz Laju Cakrawala berlabuh saat senja">
+      <span class="route-label mono" style="top:8%;right:6%;">06.0113° S, 106.1508° E</span>
+      <span class="route-label mono" style="bottom:4%;left:2%;">PORT — CILEGON, ID</span>
+    </div>
+  </div>
+
+  <svg class="wave-divider" viewBox="0 0 1440 90" preserveAspectRatio="none" style="height:70px;">
+    <path d="M0 40 C 240 90, 480 0, 720 40 C 960 80, 1200 10, 1440 40 L1440 90 L0 90 Z" fill="#0B2545"/>
+  </svg>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="tentang">
+  <div class="wrap about-grid">
+    <div>
+      <span class="section-tag">01 — Tentang Kami</span>
+      <h2>Mitra tepercaya untuk setiap sandar dan berangkat.</h2>
+      <div class="value-list" style="margin-top:36px;">
+        <div class="value-item">
+          <span class="value-num mono">A</span>
+          <div><h4>Integrity in All We Do</h4><p>Menjunjung kejujuran dan transparansi dalam setiap layanan.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="value-num mono">B</span>
+          <div><h4>Reliability You Can Trust</h4><p>Tim berpengalaman yang memberikan layanan andal &amp; profesional.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="value-num mono">C</span>
+          <div><h4>Efficiency In Every Step</h4><p>Bekerja efisien untuk mendukung setiap kapal tepat waktu.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="value-num mono">D</span>
+          <div><h4>Global Reach, Local Support</h4><p>Siap melayani kapal dari berbagai negara di pelabuhan utama.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <p>PT Daviz Laju Cakrawala adalah perusahaan agensi pelayaran yang menyediakan layanan profesional dengan integritas, keandalan, dan efisiensi untuk menghubungkan setiap perjalanan di lautan.</p>
+      <p>Berbasis di Cilegon, Banten, kami mendampingi kapal dan principal dari proses sandar, kebutuhan awak kapal, hingga dukungan logistik — memastikan operasional berjalan lancar dari pelabuhan ke pelabuhan.</p>
+      <div class="commit-box">
+        <span class="section-tag">Komitmen Kami</span>
+        <p>Kami berkomitmen memberikan layanan agensi pelayaran yang profesional, aman, dan tepat waktu kepada seluruh principal dan mitra kami di seluruh dunia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="layanan">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">02 — Layanan Kami</span>
+      <h2>Tiga lini layanan, satu standar keandalan.</h2>
+      <p>Dari kedatangan kapal hingga kebutuhan logistik, kami menangani setiap aspek agensi pelayaran Anda.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17h18M5 17V9l7-4 7 4v8M9 17v-4h6v4"/></svg></div>
+        <span class="code mono">LAYANAN — 01</span>
+        <h3>Ship Agency</h3>
+        <p>Menyediakan layanan agensi lengkap untuk seluruh jenis kapal, dari kedatangan hingga keberangkatan di pelabuhan.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3.2"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></div>
+        <span class="code mono">LAYANAN — 02</span>
+        <h3>Husbandry Service</h3>
+        <p>Memastikan dukungan dan perawatan terbaik untuk kebutuhan awak kapal dan kapal itu sendiri.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="8" width="16" height="11" rx="1"/><path d="M8 8V6a4 4 0 018 0v2"/></svg></div>
+        <span class="code mono">LAYANAN — 03</span>
+        <h3>Ship Logistic</h3>
+        <p>Memberikan dukungan logistik yang efisien agar operasional Anda tetap berjalan lancar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOBAL REACH ================= -->
+<section class="reach" id="jangkauan">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">03 — Jangkauan</span>
+      <h2>Dukungan lokal, koneksi lintas pelabuhan dunia.</h2>
+      <p>Siap melayani kapal dari berbagai negara di pelabuhan-pelabuhan utama.</p>
+    </div>
+    <div class="reach-grid">
+      <div class="reach-photo">
+        <img src="assets/port-wide.jpg" alt="Aktivitas kapal kontainer dan crane di pelabuhan">
+        <span class="route-label mono">PORT OPERATIONS — LIVE</span>
+      </div>
+      <div class="reach-stats">
+        <div class="reach-stat"><b>Integrity</b><span>Kejujuran &amp; transparansi</span></div>
+        <div class="reach-stat"><b>Professionalism</b><span>Tim berpengalaman</span></div>
+        <div class="reach-stat"><b>Efficiency</b><span>Layanan tepat waktu</span></div>
+        <div class="reach-stat"><b>Global Reach</b><span>Pelabuhan utama dunia</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="kontak">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">04 — Kontak</span>
+      <h2>Rencanakan pelayaran Anda bersama kami.</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <dl>
+          <div>
+            <dt>Alamat</dt>
+            <dd>PT. Daviz Laju Cakrawala<br>Graha SUCOFINDO Cilegon, Ground Floor<br>Jl. A. Yani No. 106, Cilegon, Banten 42421, Indonesia</dd>
+          </div>
+          <div>
+            <dt>Telepon</dt>
+            <dd>+62 254 1234 567</dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd>info@dalaca.co.id</dd>
+          </div>
+          <div>
+            <dt>Website</dt>
+            <dd>www.dalaca.co.id</dd>
+          </div>
+        </dl>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); this.reset(); alert('Terima kasih, pesan Anda telah terkirim.');">
+        <label for="name">Nama</label>
+        <input id="name" type="text" placeholder="Nama Anda" required>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="nama@perusahaan.com" required>
+        <label for="message">Pesan</label>
+        <textarea id="message" rows="4" placeholder="Ceritakan kebutuhan agensi kapal Anda" required></textarea>
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 PT. Daviz Laju Cakrawala — Your Voyage, Our Priority</span>
+    <span class="mono">DALACA / AGENT SHIPPING CO.</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.15});
+  document.querySelectorAll('.value-item, .service-card, .reach-stat, .about-copy').forEach(el=>{
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
